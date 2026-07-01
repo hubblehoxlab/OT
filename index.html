@@ -205,7 +205,8 @@ textarea.inp{min-height:88px;resize:vertical}
 .login{min-height:100vh;height:100dvh;display:grid;place-items:center;background:#F4F5F7;padding:24px;position:relative;overflow:auto}
 /* corner logo */
 .login-logo{position:absolute;top:20px;left:26px}
-.ll-seal{width:48px;height:48px;border-radius:50%;background:#fff;border:2px solid var(--brand);display:grid;place-items:center;box-shadow:0 2px 10px rgba(20,20,50,.08)}
+.ll-seal{width:52px;height:52px;border-radius:50%;background:#fff;border:2px solid var(--brand);display:grid;place-items:center;box-shadow:0 2px 10px rgba(20,20,50,.08);overflow:hidden;padding:3px}
+.ll-logo{width:100%;height:100%;object-fit:contain;border-radius:50%}
 .ll-seal svg{width:26px;height:26px;stroke:var(--brand)}
 /* split card */
 .login-card{display:grid;grid-template-columns:1fr 1fr;width:min(1060px,95vw);background:#fff;border-radius:16px;box-shadow:0 24px 64px -28px rgba(20,20,50,.28),0 2px 8px rgba(0,0,0,.04);padding:10px}
@@ -524,6 +525,25 @@ textarea.inp{min-height:88px;resize:vertical}
 .q-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:16px;align-items:stretch;grid-auto-rows:1fr}
 .q-grid .qcard{height:100%}
 .q-grid .qcard .qbody{flex:1}
+.keypick{display:flex;flex-direction:column;gap:8px}
+.kp-opt{display:flex;align-items:center;gap:11px;text-align:left;background:var(--surface);border:1.5px solid var(--line-2);border-radius:10px;padding:10px 13px;cursor:pointer;transition:.14s;font-family:inherit;width:100%}
+.kp-opt:hover{border-color:var(--brand)}
+.kp-opt.sel{border-color:var(--brand);background:var(--brand-soft);box-shadow:0 0 0 3px var(--brand-soft)}
+.kp-let{display:grid;place-items:center;width:26px;height:26px;flex:none;border-radius:7px;background:var(--surface-2);color:var(--ink);font-family:'IBM Plex Mono';font-weight:700;font-size:13px}
+.kp-opt.sel .kp-let{background:var(--brand);color:#fff}
+.kp-txt{flex:1;font-size:13px;color:var(--ink)}
+.kp-tag{font-family:'IBM Plex Mono';font-size:9px;letter-spacing:.4px;text-transform:uppercase;color:var(--muted);background:var(--surface-2);border-radius:6px;padding:3px 7px;flex:none}
+.kp-drop .kp-let{background:var(--rose-soft);color:var(--rose-deep)}
+.kp-drop.sel{border-color:var(--rose);background:var(--rose-soft);box-shadow:0 0 0 3px var(--rose-soft)}
+.kp-drop.sel .kp-let{background:var(--rose);color:#fff}
+.inp[type="date"],.inp[type="time"]{font-family:'Inter',system-ui,sans-serif}
+.inp[type="date"]::-webkit-calendar-picker-indicator,.inp[type="time"]::-webkit-calendar-picker-indicator{cursor:pointer;opacity:.55;filter:saturate(0)}
+.inp[type="date"]:hover::-webkit-calendar-picker-indicator,.inp[type="time"]:hover::-webkit-calendar-picker-indicator{opacity:1}
+.mod-submit-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:18px;padding:13px 18px;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);position:sticky;bottom:14px}
+.msb-txt{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted);font-family:'IBM Plex Mono'}
+.msb-txt svg{width:16px;height:16px}
+.mod-picked{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;color:var(--brand);background:var(--brand-soft);border-radius:8px;padding:6px 10px;margin-top:10px}
+.mod-picked svg{width:14px;height:14px}
 @media(max-width:760px){.q-grid{grid-template-columns:1fr}.paper-bar{position:static}}
 /* section tabs (paper) */
 .sec-tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
@@ -778,9 +798,7 @@ a:focus-visible,button:focus-visible,.btn:focus-visible,.nav-item:focus-visible,
 <!-- ============ LOGIN ============ -->
 <div id="loginScreen" class="login">
   <div class="login-logo">
-    <div class="ll-seal">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
-    </div>
+    <div class="ll-seal"><img class="ll-logo" src="data:image/jpeg;base64,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" alt="CET"></div>
   </div>
   <div class="login-card">
     <div class="login-art"></div>
@@ -830,7 +848,7 @@ a:focus-visible,button:focus-visible,.btn:focus-visible,.nav-item:focus-visible,
         <div class="crest"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAJQAlAMBEQACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAAGAAECBAUDBwj/xABPEAABAwMCAwMHBQoMBAcAAAABAgMEAAURBiESMUETUWEHInGBkaHRFBUyscEWIzNCVWOSk+HwFyRDREVSYnKCg5SyJTQ18TZTVHN0otL/xAAaAQACAwEBAAAAAAAAAAAAAAAAAwECBAUG/8QAMhEAAgIBAwEHAQgCAwEAAAAAAAECAxESITEEExQiMkFRUmEFFTNCcZGhsSOB0eHwYv/aAAwDAQACEQMRAD8A9xoAVACoAVACzigCjdbvb7RH7e5y2ozfQuK3PoHM1aMZTeIohyUd2Dh1lKuO2mrDMnpOwkPfeGvarcim9io+eWCmvPlRL5PreaMuXC2WxJ6Msl5Q9atqM0R9GwxY/oL7l74veTrO4lX5phtsewCjtYekF/JGiXyF9yV0SfN1hdwfEIP2UdtD4L+Q0S+X9DfMWrYpzE1YmQOiJcJBz6xvR2lL5h/JOmfoxG66wtx/j9ii3Fkc3ID/AAqH+BXOjRVLyyx+oaprlFy161s058RXXXIMzODGmILas+Gdj7arKmcVnlEqyLCMKB5UouPQAqAFQAqAFQAqAFQAqAOMqSzEYckSXUMstp4luLOAkeJqUm9kGcAcvUV41M4qPpNgMQgeFd2lIwk9/ZIP0j4nanqEa1mzn2/5F6nLylqLpS0Wdt67XXtbnMaQXHZUodorbc8KeQ9VVds5+FbINKitTOzurYi4USbbi29EMhDUriJSthKtgeH04qVRJNxlsyjvWFJcFnWy5Lelp70N1xp5pAWFNnBwFDPuzUdOk7UmTflVtoGrw+l/QklLSkJV2zKiGppfWApadyo7g89qfWsX7/X0EWSbp2+nqdg7PZ1lYbfcO0cXFMgIk/ivtqbPCT/aGMH9tRiLplJeuP8AROZK2MWW7PGT91l5WmXKREgqbIb7dRQVKRlWQTy8KrY/8UVjdl4fiSedkV9NamuFxmxh2iZTcl1wuM9gUqitb8Cirkc+NWtojCL9MfyVqulJr6/wa9ze09ep6rHcGmpT3IhTZISrGSkKHJWN8ZpEY2Qj2iHOVcpaXyZa7DfdNZd0tMMyEk5NrmKzgdza+Y9Bq/aQs8639w0yj5TY05qqDfFrj4XEuDP4aFIHC4gjnjvHiKXOtw/QvGWo36WWFQAqAFQAqAFQBQvV3hWW3Oz7i8GmGhuTzJ6ADqT3VaEJTemPJEpKKywPiWudrJ5N21OFRbOg9pFthPDxDot71dP3LnJV+GHPv/wLSc95cG7qS4C3afZdtjjbTDjrTIfaAKWG1KwVjpsOXSq1Q1TxIi6emGYlNtLkDUEGHHuT8+JOaX27L7gdKABkLB6A5x3VbzVttYaKLMZpJ5TObOjIztnXBupQksuLTHksKw4Gc5SFbY27jkbVL6mSnqj/AOZC6ZOOmX8ewSpba+SCKtC5DfZhtXGM8Y5b52NZ8vOTTjbA0eG1HbKI0OMyk4ylIAB9OBQ5N8sFFLhHcpcKgoobOORzuPdUAcVsNKbfSuIkh8Yd7Mjz8jG/ImpywcUZqrI00XTapS4DzkZMYYSCEpSTggHqNxmr9q35t/UX2SW8dvQyWbQ9p+5QluOl20w2n31PqQAtKyBniI+kTvg4p0rFZF+kngUoOuS9lkr2zUU2LcZlwva1Nw5MEy48bqhKVhKR/ePEPaKtOqMoqMOc4KxtlGTlPjGUjUvGnY2qIMWeUPW26JbDjElGzrJxkBWOY8KRGx1trlGjGtavUr6b1LKauI09qlKWLskfeXhs3LT3pP8AW8Kmdaxrhx/RMZb4fIYA5pJcegBUAKgDjMlMw4zsmS4ltlpJWtajgJA5mpSbeEQ3gBrHDe1rdEahuzak2hhX/DIbnJf51Y6+H750Taqjojz6i0tb1Pg1tVXOdBmxIvyOPItk1JYc418KuNW3DnkMjl3nuqtMISi3ndFLrJRkljZmXo21ykR1MoS61ES8pmXAnoJBHMKR3EjGRy2NN6icW8+vo0K6eDxjhcNMKYFrgW9Sxa4TDClbKWhHu/ZWaVkpeZmqNcI+VGVqLWNk0+pSJT5kzB/N2SFKT6eifXTKunst4KzthDlnn918qt4kqKbaxHhtZ2JHaOe/Yeyt8Ps+C8zyZpdVL0BmXq3UUokvXqbv0bdKB/8AXFaY9NVHiIl2zfLK7d+vTauJF4uQP/y3D9tWdFePKiFZL3NSBr7U0FQKbmt4D8WQkOD4++ly6OqS4GRvmvUMLL5WGXSlq/QODJx20bzkjxKScj1E1js+z2t4PI+HUr8x6DbZ0S5xEybXJalRlbearIHh4HwNYJRlB4ksM0JqS2Kdy0/Cu90gz5JXmFkdjgcKtwRxeggHuq8LpQi4r1KTpjOSk/Qw7XHuN9E+cb3Ji3BmQ421Fbcw0xwnzQtH42ep7jTpuNeI6crYTBSsTlnfcuXSNZ9awn7e3NaVcISgUyGNlMO4+kk/1c93d3ilLXU8tbMdqjZsnuiWir/KlLkWO+gN3uBs53SG+jie/O2fTUWwS8UeGWhLOz5CscqUXHoAVAAJqda9V6ka0vHWoW6Lwv3RaDji6pa9fX9laILs4a3z6CpeJ6fQ0NT3KCwhOnnmJrKJTHC07FbyE45AY3OMchRTBv8AyLG3uUunH8Pff1Rl6ZjyrzblQpM75ZCSeylsykqDzShyUhXPB2IzuKbc1CWpLD9McCqVKccN5XqGxKQ3wk8LTY85Sj0HjWI28HlWuPKK4+t23adcLTAylctOyl+CO4ePsrqdN0X5rP2MV3UfliebHiUoqUSSdyT1NdNRxsY2xAVOCMjlNGATGxQSNigMjcuVQ0CZoWS9XCxTEyrbIU0sfSTzSsdyh1FKtphYsSQyFji8o9u0dq2FqmN5gEe4tJ++sE9NsqT3p3FcS/p5Uvfg6FdqsWx31PaXZ9tkG2hLMtZT8oDWEKkIHNvj5jPQ1WqxRktW5FtblHw7HewaejWtlkoR5zXF2HEBxtIXglskfSwc7mossc2WrrUFhGNreAqSwzqfTy0OXO1KUQW1ZDzYOFtnHPr76tVJLwT4YT41IJrFdo17tMW5QlcTMhHEO9J5EHxByPVS5RcXhl001lGhVSTO1DdWrLZZdye3THbKgn+srkB6zgVaEHOSivUrOWmLYM6WZXprSarncUKeuU9wPvgfScccOEI8OY99On/ls0rhCk+zhl8neeqdNej27UtvjoYlrxHfiukqYdAyncjnsdxVoaYpyrfHOVyhcnKTUbVz6p+oRsNLZjsx1PKedCAHHlDBVjmo42z+/SszeXk0xWFhnmnlU1YQpWn7Y5wtpGJa0bZ/N+jln2d9dLounz/kl/oydTd+RHmITXVMbZLFSVHAoIHxQwyLhoJyR4edHoBEioAiRQWyd7dPlWuczNgulqQyriSofUR1B7qVZWpx0yLwk4vKPoLS9+Z1JZ2blHAS8kcD7QO6Fjmn0dRXAuqdc3FnTrmpxyd70u8raZZsaY6S7kLkvHPYjvCfxjRXo3cyLO04gZmn4TOnbg5Bk3xuS5OPaBh0BKy7uVqAB5EdPCr2Sdi1KPAuuKrely5M3SoOmtZ3LTajiDNHy63jon/zEj1/V41Nnjgp/wCmXjtJxD2s40CdeA3a8WHTYHE3KfMmUPzTe+D6T9VaKPDGVnsKs8UlE3LqmHeFyLE52gWGkuqcQPwRz5hz35GfVS4OVeLERPTPNbKlqtby5ocuV7Vc1wF4Q2GUthpZTzVjcqwffV52LT4Y4yVhW9XilnB21ReRYtPTLocdrw4ZCuqjsgfb7apTX2liiMsnoi2fPTi1vOLddUVOLUVKUeZJOSa9FFJLCOWxAcqsUJhJzjFGSCQFT6ED4qMgMRRkCOOdHoSRI8KM7gQINGSUQIOaqXQYeS2+qtGpERnV4iz8MqSTslf4qvbt66w9bVrhlco09PPEsHtFwiqlQZkJt1bJdbUEOIJBRnuPga5EWotM2yjqi0BbNkstjgmfPkJYWpTKVFrL7rcpByrhVuTnqnFa3bZZLSvr9NjLGuFccv6fud/KI803b7Nq2CsOJtslLnaI/GZXhKvspdKeXW/UfNp4mg6QtK0BaDlKgCCOorPwNA60KFx8p16fO6LbEajJPTiX5xrRNaaIr3Ex3sf0Ni7WSS9cfnG1XFUKUpsNu5aDiHEg7ZB6jPOqwtio6ZrKInXJy1ReGdbbaxbIbyFvrkyJLnG++sAFajgZxyGB0qtk9b4wkXrr0LnLYC+WGS/Ik2mxw21OLcJd7NAySfopGP0q29ClFSsl6COqbbjFHbTXktitsoev7i3XiATHaVwpR4FQ3J9FRb18m8VhDpVzILGtFaabThNnjHxUCT7zWbvNz/Mxvd6viJ3R+m0oKvmWKcDOAijvN3yYdhV8UD2idK2a42pVzmwGHFS3VqQzg8DCQogJA9W9P6jqLYy0KXAqmmEo6muQh+4rTX5Hjew/Gk96u+TG92p+KF9xOmvyPH9/xo71d8mHd6viiCtE6ZAz80R/VxfGo7zd8mHd6viYWktKWC629V1ftrREtxRaY4lYYQDwgc+e2T4067qLYS0KXAqqmuUdWOTc+4TS5/ohn9NfxpXern+Yb2FfsROgtLH+iGv1i/jUd6u+RPY1+xVuOhNNMQJD8e2pbeaaUttwOLyhQGQRv0NSuptk8OQOqCWyNmzzhcbRbLlyMhpBVnGxUNx+lSZx0yaLxlmKZlP2JEa8tSn7s0zAblKmCM4lIPakEE8ZP0d801WZhhLfgS6sTy3tyRdatt40debZagVMNpeZGVcQK/pZBycjJ2qPFCxSkXWmUGolvye3D5y0VaJJUVK+ThtR8UEoPvTVb46bGi0HmKZl+T89teNWyj9JdzLefBI/bTL/ACwX0KV8y/UrMa2lhpkPxpPaBh4u5iK/C5+9geGM5pr6VejX7+hnXVPbKf7eoYxHHX4cFx8AOrSlSxjG/Dk7Z7/TWSSSbSNkW2k2YkO3oma+uFzdHF8ijNR2gfxVKBUT6cH3mmueKVBeotRzY5BBc5rNut8ibJJDMdtTiyOeAM7UqMXJqKGykorLPKJXlXuynV/JoMNtvPmhwKUrHjgiupH7Oh6swS6yWdkcv4U76f5tb/1a/wD9Vb7ur92V73Z7Iv6InatkRpb9niQfkbkhSwh/KUJUTlQRvnGefjS+ph08ZJSbyXpla03BIJvlOvv/AEFlP+Yv41mx0vux2eo9kOJevPybZj/mq+NRp6b3ZOb/AGQjM15j/pdnP+cr40aem+T/AGDN/sgMkasv2krpMhvQYCC8sPlgFSkNlXPhIPXmR31sj01V8VJNmaV1lTaaQXeT7V83U781EyPHaDCUqT2PFvnPPJ8KydV0ypxh8mii52Zyjb1fdnrHYJNxjttuOM8OEuZwcqA6emk0VqyxRY2ybhFtHmEryrXZ+O6wq3wQlxBQSOPbIx310V9nwW+WZe9SfoG/k0eVI0HByTlorR+is1h6tYukaKHmtG7cdPWi6SUybjb2JLqU8IU4M7d1KjbOHlZaVUJvMkStVjhWkSkwGw21JXxloABCDwhOEgcht76J2SnhyJhXGGVEGfI+Q1o8x87MTX2wD/fJ+2m9TvZn6L+iKvKP5NtpOqG+Shd3D7QKOo/J+hWr836krDddWS7RHcRb4jxII7eQ/wAJXgkZKQNqvZXQpcsTXZe45wgtQVqRGU4AFnHFwbgHhOfVWR8mtcFG1gIu95ST5ynm3PUW0j60mry8qKrlnHXMdyVpK6NMpKl9gVBIGScbke6r9PJRti2VuWa2j56xXoTkEgKAwey+TvUdp+5mNFkS48R+MChaHXAji3J4hk75z7a4nV0z7VtLKZ0+nshoS9QpF+s3S6wP9Qj41m7Kz4sd2kPcf59s/wCVYP8AqUfGjsp+zDXD3F8+2f8AKsD/AFKPjR2c/Zh2kPc8a8qEmPL1W65Efafb7FscTSwoZweors9CmqsP6nN6lp2bG95FP+euo/NN/Wqs/wBo8RHdFywv8pgzoq4+hP8AuFZOk/Giaeo/DZ8/nnXcOcj3LyYNlvQMbi/lFukZHesgVxOsebmdHp/w0ad+RcJ94i2yNMkQYq2VuuyGBhaiCAEBXIc80utwjFyayyLNcpqKeET0w9Obm3K1zZS5iYS2+ykuJAUpK054VY2JHf41FulpSXqTVqTcW+DF8lKOPT8xY5KuUgj9IVfqPP8A6X9E1eUlow/Jdbawt52PbtSEjvCk5+0UXb1wZENpyRT1NdJ0oz48pcqEyyopZjsRln5QAeanBsAe4U6muKw1h/q+DNdZJ5Tyv0QY2+VDl2qO/bzmMjARkY4QNiN+WKxzTUsS5NkJRlHMTE1Bdk6d1XBmSjwwLgx8meX0QtKsoUf0iP8AtTq6+0raXKKTnoms8MLErS6gKQQpChkEbgis44w5GjNOyHVuu2mPxrOVFIKcn0CnR6i6KwpCnTW3lo5OaI0ylBJtLOAN91fGrd6v+RHYVexh6O0fZp1rNymwWnDLcWtprfhab4iEpG/cBmnX9TbGWhS4F1UQccyRvfcPpr8kse/40jvV3yGd3q+IjobTJ/olj2n40d6u+Qd3q+JE6F0yedpZ9qvjR3q75B3er4nlPlGtkO06lVFt7CWWA0hYQnkCefOur0c5TrzJmDqIRhPEQg8in/Ubp/7KP9xpH2jxEd0XLDPykjOirn/cT/uFYuk/Giab/wANnz6o89s+Fd5nNPo3TcA2zTdrgLGFttI48D8b6SvfXnbZaptnVgsRSM3UcS/v3B9+2SpUdtptlDKWilSXVKWeMlJ7gRTKpVKKUlnkTbGxybi8cFyzSrjHt1zXd5AfMRxYQ92PZ8aUpznHpqlii2tHqMr1Yeoz/JIwtjQkBbn05CnXj/iWrHuxU9U/8rwTV5SvcD80+VO3SSMNXeGuOT07RG492B66tHxUtezIe1mfc07teLvG1B82QYTMoSGA6yVucAQAcLz38xUQrrcNUngpZZOM9MVnJqWhq5JYcF4fjuOLVlKY6CkITjlk7n00ubhnwDK1PHjMjXVmVe9LPsISVSo/31rA3K09PWM+2mdNZ2difoRdDXDB5Np/WV6sSQ1Ek8bAP4B5PEkejqPUa61nTV27swwunDYJ2/KzcAAHLZFUe8OKHupH3bH5DO+S9if8LM0je1xv1qvhR92x+RHfJexm2PyhTbQ08w1DZXGW6pxptSz964iSUg92T1q9nQxm087lYdTKCxg0/wCFif8AkqN+tV8Kp92x+RPfJfH+f+hv4WJ/5KjfrVfCj7uj8g77L4/yL+Fmd+S4361Xwo+7Y/IO+y+P8/8AQG6ovjmoboq4PMoZWUJRwIUSNvTWyilUx0p5EWWOyWWixo/VL2lpUh5mMiR26AghaynGDnNU6jp1eks4wXptdbbSNbUPlIk3uzybc5bmWkvpAK0ukkb55Y8KRV0Sqmp6uBs+pc46cGLoKyqvmp4rJBLDKg++f7KTy9ZwPXTeqt7Ot+5WmGqZ74txKVuOrIS0yk5VnYdT7BXCxnY6XAK26xu3EPXWHf3WpUh5awuI4HGuHPmgpPhjNapWqPglHb6mSFTl41Lf6EtfTZVs0DKbfeTInyEJipWhHAHFrODgdNs1SpKVu3A6bahvyEllgi2WiHBTyjspb27wN/fSZS1SbGLZYB7yn299/TouMEfx21uplsnG+Enzvdv6qb08kpaXwylieMo0jeBKsUS921gSErCFqCU8Sw2SOPA55Hd4VVQxJwYSliOpGRYbU9JkpvTaHWJK561LckKUlTkbfCeHp028KdZYktHpj+RFdbb7T1z/AAFqvvboWPorwlWByPQ/Z7Kyms8a8pmllWe5quMRv+Iy1lRxyacO5HoO5HrFdjo+o1x0S5Rz+oq0vUuGBQreZWSBqSCQ76AFneggcnagCJNSBAmoAiTQWGQhTriW0JKlrUEpSBkknYAeNUk8LJZLc920Hp0aYsgD6QbjLIU9j8UkbIHgOp9JrhdTf2s9uEdOmvRHfkIbjbUXC2PQXXVpQ8nhcUjmQeY9dJhJxlqRecdUdLM77krazObmW/tYD6VAqMVXClwDopPIimO+bWJbi+wgpao7GHfT90HlBtVmbPFFtIM2YOnH/Jp+o+urQ8FTl77Ey8U0vYOsVmwNGcSFoKVJCkqGCD1FSAA6NcVpjUU3SMskRlkybWtR5oP0keo59hrRau0irP3FQ8L0mv5QNSyNMWdqXFjpecdeDWV54UbE5OPRiq0VKyWlsmyehZRe0jd3NQadjXCTHS0t4KCkDdJwSMjPQ1W2ChNxRaEtUclyZDZmxHYE9sOx3k8JCuo7vT3fsqkZOLyuSWk1hnius9GS9OPqebCn7ao/e3gN0f2VfHka7XTdVGxYfJzraHDdcAtWxCMDg1JUfNACzQBEmgMETRknA7LTkh5DLDa3HXDwoQgZKj3AVRySWWWUX6HsHk/0MmyhN1vKUmdj701zDA+1X1Vx+q6p2eGPB0KadG75D5tJUorWMHoO6sRoAHXOubnp7UkS3QoKHWVpQtXEklTpUSOFOPR7TWqmiM4OTYmdjjJIL9QXmPYrLJucs4Qyji4c7qV0SPEms8IOckkMlJRWTE8nVpkxba9droP+J3Zz5Q/tulO/An1A8vGmXTTajHhFa4tLL5YX0kYKgAY13p1y929uRb1dldoK+2hug4PEOaT4H68U2qel78MpOOVlcj6Sv0bVdoUmWyhMxk9nNiOJzwLHgeh/flUWQdctgjJSRp3WcLbDUiK0hb4bKmmRsAAOZxyHIekgdaot3uWexbbWFoQ1I7MOqRxLbzn07d1QSRcR5imnkdsyoYIUM7dxHX9tAAHqLyZQp5VJsD6YjihnsV7tE+B5p948K309dKO09zLPpk94nn900jfrUpXyq2vKQP5VhJcT7Ry9eK6EOqqnwzLKmceUYa/MVwr81Q5hWxFPUs8CmscjcSe8Yqchsdo0SVMUEw4z8gnkGWyv6qpKyMeXgsot8BbZfJre7gtKpoRAjn6RdOXPUkfaRWO3rq4+Xdj4dNN8npmnNK2nTYxCZL0wjC5Dm6z9iR4Du61zbr52vxM2QrjBbG8hskhbpyrGwHJP799JGFGXdjCluNuxlmOhtKy6g8RGSR9HmRt0ydxtVksojJbSuNIaTJBbWgAqSs483v36VXfgACQT5QNToWkE6btLux6S3x9aR+/OtP4MP/p/0L87+h6KOVZho9ACoAWM0AA+q9PzoVyGqNLpxcUDEuKPoy0ddhzVt7h1p9c01onx/QqUWnqiadju9u1hbO1iurYfSpHbtDhDrSknPCcg7ZFUnB1vDLRkpIstRo1rW5cp/Ah4goQc8Sgn+rk7qUcAn0Y5Cq5zsW43LttlvS1SQ8ylrsnAlISviOCkK36Z36ZHjUNYBMsANPJDrS8hQyFtqznx8agkl99HIpUCeu1AFd6Kw/j5TAbdzz420q7v39VSpNcMjCOCbVbEZU3ZowV/Zjtg1OuXuGlexcbSWxhphLYG3QfVVSSXApX4RRx3J2FAHCXNYhKaaKVlbqwlKUIzueWTyHrNSkBn3pUxEtgMrX2bhSlrhc4AhwHOF94UNh0yMdc1McYIZdLTclyPPebUy4wFea6ACkHnnpsQDkVGfQAKu9yma6nOWPTrimrOhWJ9xTycHVDZ659/o56IxVS1S59EKbc3pXAc2q2xbTAZgwWg1HZTwoSPr9J55rPKTk8saklsi5UEioAVACoAY70ACGo9IOOTxe9NyPkF4RurGzcgdyx499PhbtpnuhcoeseRrLrNh6Wm16jj/Nd2Rtwvfg3emUK8f3zROlpaoboI2LiWzN5yEqPb5TNvAS5IWTxDA4OLAJHoG/qpOd9y+Njnb47rU0tF3MaGylpocPDknv6HCQnl3mhgPCunyu4BLa2lRnG1lvG6jwKSCo+B4tvRnrQ1hBk6fOn8fXFDSSEuhokL84EoCs8OOW+OdGNshk6zbiiI+w2psqDh85QP4MZABP8AiIHv6UJZQELlOXEdYC+FuOrJcfWklKcYwDjlnfc7bUYJOc559E1hpASpmShSBxL4QlYGRvjqOL2ULghkYbDkyyJiTSoPoT2SnOR40nAWPYFCh87Ahr1ebdZICXr3KabwAcEbrUN/NTzJyKtCEpvEURKSitwSU3fdfKw6HrPp0n6HJ+Wn7En9807wU/WRTef6Bxa7bEtUJqJb2EMsNjCUIHvPefGs8pOTyxiSSwi5UEioAVACoAVACoAVAGferLb73FMe5RUPo6E7KT4gjcVaM5QeYkOKksMF02DUunP/AA5cUz4IP/ITjukdyV/9qdrrs86w/dC9M4+V5Jp13HjfxfU9rl2tZHCouNlbSvWKO7t7weSO1S8ywbUK8WG4utPQrhEccQCEhLgBwemOfQUuVdkeUMUovhl1uAyJAkIVlZdLhIxvlPDj0bA+oVRtkkZNrZkuSFvqdV2yEtkJWUgJGe495JoTwGBp7kdEXgmXBDCeHDiytCeMYwc55eqpSb4QZRiTtc6ZghthuWmW6jZtmIgunIGBg8vfTV09kt8Y/Uo7YopG7avv/m2a1ptEVX87nHK8d4RU6KoeZ5fsiNU5cLBds2hoMSULhdnnLtcuZkSjlKf7qM4FVnfJrTHZEqtLd7hXgd1JGD0AKgBUAKgBUAKgBUAKgBUAKgCDjaHE8DiQpJ5pUMg0AYVw0Xpu4EmTaI+T+M2C2fakimx6iyPDKOuD5RmK8mtgRuwqeyO5uWr7aZ3qx84/Yr2MSCPJ3aFnDku6LT3KmGjvM/p+xHYx+v7lmP5ONLsrC1wVvr735C1e7OKq+qt4ySqYewQQLVb7anhgQmI4/NNgH20qU5S5YxRS4LtVJFQAqAFQAqAFQAqAP//Z" alt="CET" class="crest-logo"></div>
         <div>
           <div class="name">Hubblehox OMS</div>
-          <div class="sub">Objection Management · v3.2 “Indigo”</div>
+          <div class="sub">Objection Management · v4.0 “Indigo”</div>
         </div>
       </div>
     </div>
@@ -929,7 +947,7 @@ const state = {
   lastProfile:{},
   exam:{ name:'PCM — Physics · Chemistry · Mathematics', tier:'Entrance · CBT', date:'14 Feb 2026', totalQ:150, marksPer:2, negMark:0.5, sections:['Physics','Chemistry','Mathematics'], perSection:50 },
   fee:500, feeModel:'per', windowOpen:true, windowStart:'20 Feb 2026', windowEnd:'27 Feb 2026', windowStartTime:'10:00 AM', windowEndTime:'05:00 PM',
-  scoreLiveStart:'02 Mar 2026', scoreLiveStartTime:'12:00 PM', scoreLiveEnd:'31 Mar 2026', scoreLiveEndTime:'11:59 PM', scoreLive:false,  // scorecard live window (start–end)
+  scoreLiveStart:'02 Mar 2026', scoreLiveStartTime:'12:00 PM', scoreLiveEnd:'31 Mar 2026', scoreLiveEndTime:'11:59 PM', scoreLive:false, modDraft:{},  // scorecard live window; modDraft = staged (unsubmitted) moderation policies
   examGate:{}, selectedExamId:'pcm',  // admin: which exam-config screens are open, and which exam is being configured
   users:[
     {id:'u-meera', name:'Meera Krishnan', email:'meera.krishnan@hubblehox.io', role:'admin', roleLabel:'Exam Controller', modules:['dashboard','pipeline','window','manage','assign','normalize','publish','reports','users','database'], status:'active', initials:'MK', color:'#1B1C5E'},
@@ -1383,7 +1401,7 @@ function normMethodCard(){
 const NAV = {
   candidate:[
     {grp:'Portal', items:[
-      {id:'home', t:'Home', ic:ICN.dash},
+      {id:'home', t:'Home', ic:'<path d="M3 10.6 12 3l9 7.6"/><path d="M5 9.4V20h14V9.4"/><path d="M9.5 20v-6h5v6"/>'},
       {id:'profile', t:'Profile', ic:ICN.user},
       {id:'payments', t:'Payment History', ic:ICN.card},
       {id:'questions', t:'Objection Tracker', ic:ICN.review}
@@ -1394,6 +1412,7 @@ const NAV = {
   ],
   admin:[
     {grp:'Overview', items:[
+      {id:'home', t:'Home', ic:'<path d="M3 10.6 12 3l9 7.6"/><path d="M5 9.4V20h14V9.4"/><path d="M9.5 20v-6h5v6"/>'},
       {id:'dashboard', t:'Dashboard', ic:ICN.dash},
       {id:'pipeline', t:'Data Pipeline', ic:ICN.flow}
     ]},
@@ -1419,18 +1438,20 @@ const NAV = {
   ],
   sme:[
     {grp:'Review Desk', items:[
+      {id:'home', t:'Home', ic:'<path d="M3 10.6 12 3l9 7.6"/><path d="M5 9.4V20h14V9.4"/><path d="M9.5 20v-6h5v6"/>'},
       {id:'assigned', t:'Assigned Objections', ic:ICN.list},
       {id:'history', t:'Decision History', ic:ICN.review}
     ]}
   ],
   moderator:[
     {grp:'Moderation Committee', items:[
+      {id:'home', t:'Home', ic:'<path d="M3 10.6 12 3l9 7.6"/><path d="M5 9.4V20h14V9.4"/><path d="M9.5 20v-6h5v6"/>'},
       {id:'modqueue', t:'Award Moderation', ic:ICN.assign},
       {id:'modhistory', t:'Moderation History', ic:ICN.review}
     ]}
   ]
 };
-const DEFAULT_SCREEN = { candidate:'home', admin:'dashboard', sme:'assigned', moderator:'modqueue' };
+const DEFAULT_SCREEN = { candidate:'home', admin:'home', sme:'home', moderator:'home' };
 const USERS = {
   candidate:{ name:'Aarav Sharma', meta:'PCM2026100482' },
   admin:{ name:'Control Room', meta:'Exam Authority' },
@@ -1543,6 +1564,7 @@ function loginAs(id){
 function permsFor(role){ return (NAV[role]||[]).flatMap(g=>g.items.map(i=>i.id)); }
 function sessionModules(){ return (state.session && state.session.modules) ? state.session.modules : permsFor(state.role); }
 function canAccess(screen){
+  if(screen==='home') return true; // landing page reachable by every role
   if(state.role==='candidate' && (screen==='questions'||screen==='home'||screen==='status')) return true; // exam + tracking reachable via Objection Tracker
   return sessionModules().includes(screen);
 }
@@ -1599,10 +1621,9 @@ function buildShell(){
   buildSpine();
   const cn=$('#chipName'); if(cn) cn.textContent=s.name;
   const rb=$('#sbReset'); if(rb) rb.style.display = state.role==='admin' ? 'flex' : 'none';
-  const cand=state.role==='candidate';
   const bellB=$('#bellBtn'), supB=$('#supportBtn');
-  if(bellB) bellB.style.display = cand ? 'none' : 'grid';
-  if(supB) supB.style.display = cand ? 'grid' : 'none';
+  if(bellB) bellB.style.display = 'none';   // notifications bell removed for all roles
+  if(supB) supB.style.display = 'grid';     // help / support icon shown for everyone
   const av=$('#chipAv'); av.textContent=s.av||(s.name||'?')[0]; if(s.color) av.style.background=s.color;
   const gs=$('#gsearch'); if(gs) gs.style.display = state.role==='candidate' ? 'none' : 'flex';
   paintBell();
@@ -1720,6 +1741,33 @@ PAGES.candidate.home = ()=>{
     </button>`).join('')}
   </div>`;
 };
+function homeCards(cards){
+  return `<div class="home-grid">
+    ${cards.map(c=>`<button class="home-card" onclick="goScreen('${c.id}')">
+      <div class="hc-ic">${svg(c.ic)}</div>
+      <div class="hc-body"><div class="hc-t">${c.t.replace(/&amp;/g,'&')}</div><div class="hc-d">${c.d}</div></div>
+      <div class="hc-arrow">${svg('<path d="M5 12h14M13 6l6 6-6 6"/>')}</div>
+    </button>`).join('')}
+  </div>`;
+}
+PAGES.admin.home = ()=>homeCards([
+  {id:'dashboard', t:'Dashboard', d:'Live operational view of the objection cycle and key metrics.', ic:ICN.dash},
+  {id:'window', t:'Window &amp; Fee', d:'Configure the objection window, fee and category cut-offs.', ic:ICN.cfg},
+  {id:'manage', t:'Objection Management', d:'Review, filter and act on every objection for an exam.', ic:ICN.list},
+  {id:'assign', t:'SME Assignment', d:'Route objections to the right subject-matter experts.', ic:ICN.assign},
+  {id:'normalize', t:'Normalization', d:'Equate raw scores across shifts for a fair comparison.', ic:ICN.norm},
+  {id:'publish', t:'Scorecard Publishing', d:'Generate and release verified, signed scorecards.', ic:ICN.pub},
+  {id:'reports', t:'Reports', d:'Download objection, fee, normalization and result reports.', ic:ICN.report},
+  {id:'users', t:'User Management', d:'Add users and assign module-based access.', ic:ICN.user}
+]);
+PAGES.sme.home = ()=>homeCards([
+  {id:'assigned', t:'Assigned Objections', d:'Review the objections routed to you and record your decisions.', ic:ICN.list},
+  {id:'history', t:'Decision History', d:'Your auditable trail of every objection decision.', ic:ICN.review}
+]);
+PAGES.moderator.home = ()=>homeCards([
+  {id:'modqueue', t:'Award Moderation', d:'Set the marking policy for every SME-accepted objection.', ic:ICN.assign},
+  {id:'modhistory', t:'Moderation History', d:'A record of every award-policy decision.', ic:ICN.review}
+]);
 PAGES.candidate.profile = ()=>{
   const me=state.me;
   return pageHead('','Profile')+`
@@ -2105,7 +2153,7 @@ function completePayment(){
 
 PAGES.candidate.status = ()=>{
   if(!state.objSubmitted){
-    return pageHead('Objection Tracker','Objection status')+
+    return pageHead('','Objection status')+
     `<div class="card"><div class="empty">${svg(ICN.obj)}<div style="font-weight:600;color:var(--ink)">No objections submitted yet</div>
       <div style="margin-top:6px">Raise objections from your question paper and complete payment to begin tracking.</div>
       <button class="btn btn-primary" style="margin-top:18px" onclick="goScreen('questions')">Go to question paper</button></div></div>`;
@@ -2119,7 +2167,7 @@ PAGES.candidate.status = ()=>{
     ['Normalization', state.normDone?'Scores equated across shifts.':'Runs after key & policy are final.', state.normDone?'done':'idle'],
     ['Scorecard published', state.scorecardReady?'Your final scorecard is ready to download.':'Awaiting result generation.', state.scorecardReady?'done':'idle']
   ];
-  return pageHead('Objection Tracker','Objection status')+`
+  return pageHead('','Objection status')+`
   <div style="margin-bottom:16px"><button class="btn btn-ghost" onclick="goScreen('questions')">${svg(ICN.list)} Review question paper &amp; answer key</button></div>
   <div class="grid cols-2">
     <div class="card pad">
@@ -2161,7 +2209,6 @@ PAGES.candidate.scorecard = ()=>{
   <div style="display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap">
     <button class="btn btn-primary" onclick="downloadScorecardPDF()">${svg('<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>')} Download PDF</button>
     <button class="btn btn-ghost" onclick="window.print()">${svg('<path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v8H6z"/>')} Print</button>
-    <button class="btn btn-ghost" onclick="toast('Verification link copied.')">${svg('<path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/>')} Verify online</button>
   </div>
   ${myRefund().count?refundNote():''}
   ${scorecardMarkup(s)}`;
@@ -2194,16 +2241,8 @@ function scorecardMarkup(s){
         <div class="sc-score"><div class="sl">Raw score</div><div class="sv">${s.raw}</div></div>
         <div class="sc-score hl"><div class="sl">Normalized</div><div class="sv">${s.normalized}</div></div>
         <div class="sc-score"><div class="sl">Percentile</div><div class="sv">${s.percentile}</div></div>
-        <div class="sc-score"><div class="sl">Category cutoff</div><div class="sv">${s.cutoff}</div></div>
-      </div>
-      <div class="sc-qual">
-        <div class="ic">${svg(ICN.check,'stroke="#fff" stroke-width="2.4"')}</div>
-        <div><div class="qt">${s.qualified?'Qualified':'Not Qualified'}</div>
-          <div class="qs">Percentile ${s.percentile} ${s.qualified?'≥':'<'} ${state.me.cat} cutoff ${s.cutoff}. ${s.qualified?'Advances to Tier II.':'Does not advance to Tier II.'}</div></div>
-        <div class="qr"><div class="qrbox">${qrSvg()}</div><small>Scan to verify</small></div>
       </div>
     </div>
-    <div class="sc-foot">${svg(ICN.check)} Digitally signed by the Examination Authority · Issued on Hubblehox OMS · Verification ID HBX-${state.me.roll.slice(-6)}-V${s.version} · Tamper-evident QR enabled.</div>
   </div>`;
 }
 async function downloadScorecardPDF(){
@@ -2231,25 +2270,14 @@ async function downloadScorecardPDF(){
       .forEach(r=>{ doc.setTextColor(120,120,120); doc.text(r[0], M, y); doc.setTextColor(33,33,33); doc.text(String(r[1]), M+190, y); y+=21; });
     y+=12; doc.setFont('helvetica','bold'); doc.setFontSize(11); doc.setTextColor(33,33,33);
     doc.text('Scores', M, y); y+=10; doc.line(M,y,W-M,y); y+=22;
-    const boxes=[['Raw score',s.raw],['Normalized',s.normalized],['Percentile',s.percentile],['Category cutoff',s.cutoff]];
-    const bw=(W-2*M-3*12)/4;
+    const boxes=[['Raw score',s.raw],['Normalized',s.normalized],['Percentile',s.percentile]];
+    const bw=(W-2*M-2*12)/3;
     boxes.forEach((b,i)=>{ const x=M+i*(bw+12);
       doc.setDrawColor(224,224,224); doc.setFillColor(247,247,247); doc.roundedRect(x,y,bw,56,6,6,'FD');
       doc.setFontSize(7.5); doc.setTextColor(120,120,120); doc.text(String(b[0]).toUpperCase(),x+10,y+18);
       doc.setFontSize(17); doc.setFont('helvetica','bold'); doc.setTextColor(33,33,33); doc.text(String(b[1]),x+10,y+44);
       doc.setFont('helvetica','normal'); });
-    y+=56+28;
-    const ok=!!s.qualified;
-    if(ok){ doc.setFillColor(220,252,231); } else { doc.setFillColor(255,226,226); }
-    doc.roundedRect(M,y,W-2*M,52,6,6,'F');
-    if(ok){ doc.setTextColor(0,138,46); } else { doc.setTextColor(159,7,18); }
-    doc.setFont('helvetica','bold'); doc.setFontSize(13); doc.text(ok?'QUALIFIED':'NOT QUALIFIED', M+16, y+22);
-    doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(70,70,70);
-    doc.text('Percentile '+s.percentile+' '+(ok?'>=':'<')+' '+me.cat+' cutoff '+s.cutoff+'. '+(ok?'Advances to Tier II.':'Does not advance to Tier II.'), M+16, y+40);
-    y+=52+30;
-    doc.setDrawColor(224,224,224); doc.line(M,y,W-M,y); y+=16;
-    doc.setFontSize(7.5); doc.setTextColor(120,120,120);
-    doc.text('Digitally signed by the Examination Authority  ·  Issued on Hubblehox OMS  ·  Verification ID HBX-'+me.roll.slice(-6)+'-V'+s.version+'  ·  Tamper-evident.', M, y, {maxWidth:W-2*M});
+    y+=56+20;
     doc.save('Scorecard_'+me.roll+'.pdf');
     toast('Scorecard PDF downloaded.');
   }catch(e){ console.warn('PDF export failed',e); toast('Could not generate the PDF — check your connection and try again.'); }
@@ -2277,7 +2305,7 @@ PAGES.admin.dashboard = ()=>{
   const tot=q.length, pend=q.filter(o=>o.status==='pending'||o.status==='review').length;
   const acc=q.filter(o=>o.status==='accepted').length, rej=q.filter(o=>o.status==='rejected').length;
   const L=refundLedger();
-  return pageHead('Exam Authority · Control Room','Objection dashboard','Live operational view of the objection cycle before scores are finalised.')+`
+  return pageHead('','Objection dashboard','Live operational view of the objection cycle before scores are finalised.')+`
   ${controlTower()}
   ${slaCard()}
   <div class="grid cols-4" style="margin-bottom:18px">
@@ -2330,7 +2358,7 @@ function pipelineMini(){
 }
 
 PAGES.admin.pipeline = ()=>{
-  return pageHead('Integration','End-to-end data pipeline','How the three products hand data to one another — from the moment the exam ends to scorecard download.')+`
+  return pageHead('','End-to-end data pipeline','How the three products hand data to one another — from the moment the exam ends to scorecard download.')+`
   <div class="flowmap" style="margin-bottom:22px">
     <div class="fm-grid"></div>
     <div class="fm-stages">
@@ -2695,8 +2723,11 @@ function hasAccepted(){ return acceptedQueue().length>0; }
 function modPending(){ return acceptedQueue().filter(o=>o.modStatus!=='moderated'); }
 function allModerated(){ return acceptedQueue().every(o=>o.modStatus==='moderated'); }
 function pipelineReady(){ return allResolved() && allModerated(); }
-function policyLabel(p){ return p==='ALL'?'Award to all candidates':p==='ATTEMPTED'?'Award to attempted only':'Re-evaluate (corrected key)'; }
-function moderate(objId,policy){
+function policyLabel(p){ return p==='ALL'?'Award to all candidates':p==='ATTEMPTED'?'Award to attempted Candidates':'Re-evaluated (Corrected Ans)'; }
+function stageMod(qn,policy){ state.modDraft[qn]=policy; render(); }
+function stagedPending(){ return dedupeByQuestion(modPending()).filter(o=>state.modDraft[o.q]); }
+function draftComplete(){ const p=dedupeByQuestion(modPending()); return p.length>0 && p.every(o=>state.modDraft[o.q]); }
+function commitMod(objId,policy){
   const o=state.queue.find(x=>x.id===objId); if(!o) return;
   const q=state.questions.find(x=>x.n===o.q);
   if(q){ if(policy==='ALL'||policy==='ATTEMPTED'){ q.dropped=true; q.award=policy; } else { q.dropped=false; q.award=null; } }
@@ -2705,9 +2736,37 @@ function moderate(objId,policy){
   group.forEach(s=>{ s.modStatus='moderated'; s.modPolicy=policy; dbModerate(s,policy,(state.session&&state.session.name)||'Moderator'); });
   const kh=state.keyHistory.find(k=>k.q===o.q);
   if(kh){ kh.checker=(state.session&&state.session.name)||'Moderation Committee'; kh.stage='Finalised (v2)'; kh.policy=policyLabel(policy); }
+  delete state.modDraft[o.q];
+}
+function submitModeration(){
+  const pend=stagedPending(); const total=dedupeByQuestion(modPending()).length;
+  if(!pend.length){ toast('Select an award policy for each question before submitting.'); return; }
+  const n=pend.length;
+  $('#modal').innerHTML=`
+    <div class="modal-head">
+      <div class="mh-ic" style="background:var(--brand-soft)">${svg(ICN.assign,'stroke="var(--brand)"')}</div>
+      <div><h3>Submit moderation</h3><p>Finalise the award policies</p></div>
+      <button class="close" onclick="closeModal()">${svg('<path d="M18 6 6 18M6 6l12 12"/>')}</button>
+    </div>
+    <div class="modal-body" style="text-align:center;padding:24px 24px 8px">
+      <div style="font-family:'Archivo';font-weight:800;font-size:40px;color:var(--brand);line-height:1">${n}${n<total?`<span style="font-size:20px;color:var(--muted)"> / ${total}</span>`:''}</div>
+      <div style="color:var(--muted);font-size:13px;margin-top:5px">question${n>1?'s':''} will be finalised and sent to Normalization</div>
+      ${n<total?`<div class="note note-warn" style="margin-top:16px;text-align:left">${svg('<path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/>')}<span>${total-n} question(s) have no policy selected and won't be submitted. Normalization stays locked until all are done.</span></div>`:''}
+      <div class="note note-info" style="margin-top:14px;text-align:left">${svg('<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>')}<span>Once submitted, these award policies are committed and candidate scores are re-evaluated.</span></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal()">Back</button>
+      <button class="btn btn-primary" onclick="doSubmitModeration()">Confirm &amp; submit</button>
+    </div>`;
+  $('#overlay').classList.add('open');
+}
+function doSubmitModeration(){
+  closeModal();
+  const pend=stagedPending(); const n=pend.length;
+  pend.forEach(o=>commitMod(o.id, state.modDraft[o.q]));
   if(pipelineReady()){ state.reEvalDone=true; dbReeval(); }
   render();
-  toast('Q'+o.q+' — '+policyLabel(policy)+(group.length>1?' · applied to '+group.length+' objections':'')+'.');
+  toast('Moderation submitted — '+n+' question'+(n>1?'s':'')+' finalised.'+(pipelineReady()?' Normalization is now unlocked.':''));
 }
 
 /* ---- fee model helpers (candidate context = primary exam globals) ---- */
@@ -2779,7 +2838,7 @@ function adminExamCard(screen){
       <div class="et-foot"><span class="et-tier">${e.tier}</span><span class="et-cta">${g.cta} →</span></div>
     </button>`;
   }).join('');
-  return pageHead(g.eyebrow,g.title,g.lede)+`<div class="exam-grid">${cards}</div>`;
+  return pageHead('',g.title,g.lede)+`<div class="exam-grid">${cards}</div>`;
 }
 function enterExam(s,id){ if(id) state.selectedExamId=id; state.examGate[s]=true; if(s==='manage') state.objFilter={subject:'all',status:'all',sme:'all'}; render(); window.scrollTo(0,0); }
 function backToExamCard(s){ state.examGate[s]=false; render(); window.scrollTo(0,0); }
@@ -2790,11 +2849,16 @@ function examBackBar(screen){
   </div>`;
 }
 
+const _MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function dateToInput(str){ const m=String(str||'').trim().match(/^(\d{1,2})\s+([A-Za-z]{3})[A-Za-z]*\s+(\d{4})$/); if(!m) return ''; const mo=_MON.indexOf(m[2].slice(0,3)); if(mo<0) return ''; return `${m[3]}-${String(mo+1).padStart(2,'0')}-${m[1].padStart(2,'0')}`; }
+function inputToDate(iso){ const m=String(iso||'').match(/^(\d{4})-(\d{2})-(\d{2})$/); if(!m) return iso||''; return `${m[3]} ${_MON[+m[2]-1]} ${m[1]}`; }
+function timeToInput(str){ const s=String(str||'').trim(); let m=s.match(/^(\d{1,2}):(\d{2})\s*([AaPp][Mm])$/); if(m){ let h=+m[1]%12; if(m[3].toLowerCase()==='pm') h+=12; return `${String(h).padStart(2,'0')}:${m[2]}`; } return /^\d{2}:\d{2}$/.test(s)?s:''; }
+function inputToTime(hhmm){ const m=String(hhmm||'').match(/^(\d{1,2}):(\d{2})$/); if(!m) return hhmm||''; let h=+m[1]; const ap=h>=12?'PM':'AM'; const h12=h%12||12; return `${String(h12).padStart(2,'0')}:${m[2]} ${ap}`; }
 PAGES.admin.window = ()=>{
   if(!state.examGate.window) return adminExamCard('window');
   const perActive = getCfg('feeModel')!=='flat';
   const ex=selectedExam();
-  return pageHead('Objection Tracker · Config','Window &amp; fee configuration','Set the objection window schedule and the fee charged to candidates.')+examBackBar('window')+`
+  return pageHead('','Window &amp; fee configuration','Set the objection window schedule and the fee charged to candidates.')+examBackBar('window')+`
   <div class="grid cols-2" style="margin-bottom:18px">
     <div class="card pad">
       <div class="sec-title">${svg(ICN.clock)} Window control</div>
@@ -2803,14 +2867,14 @@ PAGES.admin.window = ()=>{
         <div><b style="font-family:'Archivo'">Objection window</b><div style="font-size:12px;color:var(--muted)">Currently ${getCfg('windowOpen')?'accepting objections':'closed'}</div></div>
         <div class="toggle ${getCfg('windowOpen')?'on':''}" onclick="setCfg('windowOpen',!getCfg('windowOpen'));render();buildShell();toast('Window '+(getCfg('windowOpen')?'opened':'closed')+'.')"></div>
       </div>
-      <div class="field" style="margin-top:16px"><label>Start date</label><input class="inp" value="${getCfg('windowStart')}" onchange="setCfg('windowStart',this.value)"></div>
-      <div class="field"><label>Start time</label><input class="inp" value="${getCfg('windowStartTime')}" onchange="setCfg('windowStartTime',this.value)"></div>
-      <div class="field"><label>End date</label><input class="inp" value="${getCfg('windowEnd')}" onchange="setCfg('windowEnd',this.value)"></div>
-      <div class="field"><label>End time</label><input class="inp" value="${getCfg('windowEndTime')}" onchange="setCfg('windowEndTime',this.value)"></div>
+      <div class="field" style="margin-top:16px"><label>Start date</label><input type="date" class="inp" value="${dateToInput(getCfg('windowStart'))}" onchange="setCfg('windowStart',inputToDate(this.value))"></div>
+      <div class="field"><label>Start time</label><input type="time" class="inp" value="${timeToInput(getCfg('windowStartTime'))}" onchange="setCfg('windowStartTime',inputToTime(this.value))"></div>
+      <div class="field"><label>End date</label><input type="date" class="inp" value="${dateToInput(getCfg('windowEnd'))}" onchange="setCfg('windowEnd',inputToDate(this.value))"></div>
+      <div class="field"><label>End time</label><input type="time" class="inp" value="${timeToInput(getCfg('windowEndTime'))}" onchange="setCfg('windowEndTime',inputToTime(this.value))"></div>
       <button class="btn btn-primary" onclick="render();toast('Window schedule saved.')">Save schedule</button>
     </div>
     <div class="card pad">
-      <div class="sec-title">${svg(ICN.fee)} Objection fee</div>
+      <div class="sec-title">${svg(ICN.card)} Objection fee</div>
       <div class="sec-sub">Choose how the objection fee is calculated.</div>
       <div class="fee-modes">
         <button class="fee-mode ${perActive?'on':''}" onclick="setCfg('feeModel','per');render()">
@@ -2882,7 +2946,7 @@ function clearObjFilter(){ state.objFilter={subject:'all',status:'all',sme:'all'
 PAGES.admin.manage = ()=>{
   if(!state.examGate.manage) return adminExamCard('manage');
   const ex=selectedExam();
-  const head=pageHead('Objection Tracker','Objection management — '+ex.name,'Totals, subject and SME breakdown, and a filterable register of every objection.')+examBackBar('manage');
+  const head=pageHead('','Objection management — '+ex.name,'Totals, subject and SME breakdown, and a filterable register of every objection.')+examBackBar('manage');
   if(!ex.primary){
     return head+`<div class="card"><div class="empty">${svg(ICN.check)}<div style="font-weight:600;color:var(--ink)">No objections recorded for ${ex.name}</div>
       <div style="margin-top:6px">This exam is still in its objection window — challenges will appear here once candidates submit them.</div></div></div>`;
@@ -2991,7 +3055,7 @@ PAGES.admin.assign = ()=>{
   if(!state.examGate.assign) return adminExamCard('assign');
   const ex=selectedExam();
   const subs=(ex.sections||[]);
-  const head=pageHead('Objection Tracker','SME assignment — '+ex.name)+examBackBar('assign');
+  const head=pageHead('','SME assignment — '+ex.name)+examBackBar('assign');
   const rows=subs.map(sub=>{
     const owner=smeOwnerForSubject(sub);
     const list=ex.primary?state.queue.filter(o=>o.subject===sub):[];
@@ -3040,7 +3104,7 @@ function normalizePrimary(){
     ? `<b>Normalization is locked.</b> ${pendCount()} objection(s) are still open with the Subject Experts.`
     : `<b>Normalization is locked.</b> ${modPending().length} accepted question(s) are awaiting an award-policy decision from the Moderation Committee.`;
   const stats=state.shiftStats;
-  return pageHead('Result Engine · Product 02','Score normalization','Equate raw scores across shifts so candidates are judged fairly despite differing paper difficulty.')+examBackBar('normalize')+`
+  return pageHead('','Score normalization','Equate raw scores across shifts so candidates are judged fairly despite differing paper difficulty.')+examBackBar('normalize')+`
   ${!canRun?`<div class="note note-warn" style="margin-bottom:18px">${svg('<path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/>')}<span>${lockMsg} The answer key and award policy must be final before equating.</span></div>`:''}
   ${normMethodCard()}
   <div class="card pad" style="margin-bottom:18px">
@@ -3080,7 +3144,7 @@ function normalizePrimary(){
 function normalizeOther(ex){
   const stats=ex.shiftStats||[];
   const done=ex.normDone;
-  return pageHead('Result Engine · Product 02','Score normalization','Equate raw scores across shifts so candidates are judged fairly despite differing paper difficulty.')+examBackBar('normalize')+`
+  return pageHead('','Score normalization','Equate raw scores across shifts so candidates are judged fairly despite differing paper difficulty.')+examBackBar('normalize')+`
   <div class="card pad" style="margin-bottom:18px">
     <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
       <div><div class="sec-title" style="margin-bottom:2px">${svg(ICN.norm)} Run the engine</div>
@@ -3131,12 +3195,12 @@ function scoreLiveCard(){
     <div class="sec-sub">Set the period during which verified scorecards are available to candidates for ${ex.name}.</div>
     <div class="grid cols-2" style="gap:0 30px">
       <div>
-        <div class="field"><label>Live from — date</label><input class="inp" value="${getCfg('scoreLiveStart')}" onchange="setCfg('scoreLiveStart',this.value)"></div>
-        <div class="field"><label>Live from — time</label><input class="inp" value="${getCfg('scoreLiveStartTime')}" onchange="setCfg('scoreLiveStartTime',this.value)"></div>
+        <div class="field"><label>Live from — date</label><input type="date" class="inp" value="${dateToInput(getCfg('scoreLiveStart'))}" onchange="setCfg('scoreLiveStart',inputToDate(this.value))"></div>
+        <div class="field"><label>Live from — time</label><input type="time" class="inp" value="${timeToInput(getCfg('scoreLiveStartTime'))}" onchange="setCfg('scoreLiveStartTime',inputToTime(this.value))"></div>
       </div>
       <div>
-        <div class="field"><label>Live until — date</label><input class="inp" value="${getCfg('scoreLiveEnd')}" onchange="setCfg('scoreLiveEnd',this.value)"></div>
-        <div class="field"><label>Live until — time</label><input class="inp" value="${getCfg('scoreLiveEndTime')}" onchange="setCfg('scoreLiveEndTime',this.value)"></div>
+        <div class="field"><label>Live until — date</label><input type="date" class="inp" value="${dateToInput(getCfg('scoreLiveEnd'))}" onchange="setCfg('scoreLiveEnd',inputToDate(this.value))"></div>
+        <div class="field"><label>Live until — time</label><input type="time" class="inp" value="${timeToInput(getCfg('scoreLiveEndTime'))}" onchange="setCfg('scoreLiveEndTime',inputToTime(this.value))"></div>
       </div>
     </div>
     <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-top:1px solid var(--line);margin-top:6px">
@@ -3149,7 +3213,7 @@ function scoreLiveCard(){
 }
 function publishPrimary(){
   const ready = state.normDone;
-  return pageHead('Result Engine · Product 03','Scorecard publishing','Set the scorecard live window, then generate verified scorecards from normalized scores.')+examBackBar('publish')+
+  return pageHead('','Scorecard publishing','Set the scorecard live window, then generate verified scorecards from normalized scores.')+examBackBar('publish')+
   scoreLiveCard()+`
   ${!ready?`<div class="note note-warn" style="margin-bottom:18px">${svg('<path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/>')}<span><b>Publishing is locked.</b> Run the Normalization Engine first — scorecards need normalized scores.</span></div>`:''}
   <div class="card pad" style="margin-bottom:18px">
@@ -3189,7 +3253,7 @@ function publishPrimary(){
 }
 function publishOther(ex){
   const ready = ex.normDone;
-  return pageHead('Result Engine · Product 03','Scorecard publishing','Set the scorecard live window, then generate verified scorecards from normalized scores.')+examBackBar('publish')+
+  return pageHead('','Scorecard publishing','Set the scorecard live window, then generate verified scorecards from normalized scores.')+examBackBar('publish')+
   scoreLiveCard()+`
   ${!ready?`<div class="note note-warn" style="margin-bottom:18px">${svg('<path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/>')}<span><b>Publishing is locked.</b> Run normalization for ${ex.name} first.</span></div>`:''}
   <div class="card pad" style="margin-bottom:18px">
@@ -3236,7 +3300,7 @@ PAGES.admin.import = ()=>{
     {kind:'answerkey', title:'Provisional answer key', desc:'Question → key. Loaded as the provisional (v1) key candidates raise objections against.', cols:'question, key'},
     {kind:'responses', title:'Candidate responses', desc:'Roll → question → chosen answer. Updates the response sheet used for scoring.', cols:'roll, question, answer'}
   ];
-  return pageHead('Administration','Data import')+`
+  return pageHead('','Data import')+`
   ${cards.map(c=>{ const pv=window['_imp_'+c.kind+'_preview']; return `
   <div class="card pad" style="margin-bottom:18px">
     <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
@@ -3259,7 +3323,7 @@ PAGES.admin.appeals = ()=>{
   const open=state.appeals.filter(a=>a.status==='open');
   const upheld=state.appeals.filter(a=>a.status==='upheld').length;
   const dismissed=state.appeals.filter(a=>a.status==='dismissed').length;
-  return pageHead('Objection Tracker','Appeals &amp; grievances','Candidates can escalate a decided objection for a final review by the Exam Authority. Resolve each as upheld (ruling changes) or dismissed (ruling stands).')+`
+  return pageHead('','Appeals &amp; grievances','Candidates can escalate a decided objection for a final review by the Exam Authority. Resolve each as upheld (ruling changes) or dismissed (ruling stands).')+`
   <div class="grid cols-3" style="margin-bottom:18px">
     ${kpi(ICN.review,'Open grievances',open.length,'awaiting review','accent-a')}
     ${kpi(ICN.check,'Upheld',upheld,'ruling revised','accent-g')}
@@ -3282,7 +3346,7 @@ PAGES.admin.appeals = ()=>{
 PAGES.admin.keyhistory = ()=>{
   const kh=state.keyHistory;
   const finalised=kh.filter(k=>k.stage&&k.stage.startsWith('Finalised')).length;
-  return pageHead('Result Engine · Answer Key','Key revisions')+`
+  return pageHead('','Key revisions')+`
   <div class="grid cols-3" style="margin-bottom:18px">
     ${kpi(ICN.review,'Keys revised',kh.length,'questions changed','')}
     ${kpi(ICN.check,'Finalised (v2)',finalised,'checker-confirmed','accent-g')}
@@ -3341,7 +3405,7 @@ function reportsList(ex){
         : `<span class="badge-st st-pending" title="${r.gate||''}"><span class="bd"></span>Pending</span>`}
     </div>`).join('');
   const avail=reports.filter(r=>r.ready).length;
-  return pageHead('Reports','Exam reports','Download objection, fee, normalization and result reports for this exam.')+examBackBar('reports')+`
+  return pageHead('','Exam reports','Download objection, fee, normalization and result reports for this exam.')+examBackBar('reports')+`
   <div class="grid cols-3" style="margin-bottom:18px">
     ${kpi(ICN.report,'Reports available',avail+' / '+reports.length,'ready to download','accent-g')}
     ${kpi(ICN.user,'Candidates',ex.candidates,'in this exam','')}
@@ -3418,7 +3482,7 @@ PAGES.admin.users = ()=>{
   const customs=us.filter(u=>u.custom).length;
   const smes=us.filter(u=>u.role==='sme').length;
   const rows=us.map(userRow).join('');
-  return pageHead('Administration','User management','Add users and assign module-based access. Custom users can be scoped to any combination of modules.')+`
+  return pageHead('','User management','Add users and assign module-based access. Custom users can be scoped to any combination of modules.')+`
   <div class="grid cols-4" style="margin-bottom:18px">
     ${kpi(ICN.user,'Total users',us.length,'on the platform','')}
     ${kpi(ICN.dash,'Administrators',admins,'full access','')}
@@ -3592,7 +3656,7 @@ PAGES.sme.assigned = ()=>{
   const groups = dedupeByQuestion(q);   // review once per question
   const pendingGroups = groups.filter(o=>o.status==='review'||o.status==='pending');
   const decidedGroups = groups.filter(o=>o.status==='accepted'||o.status==='rejected');
-  return pageHead('SME Review Desk · '+me,'Review queue — '+(sub||'all subjects'),'Each question is reviewed once; your ruling applies to every candidate who objected to it. Accepting sends the question to the Moderation Committee and recalculates scores downstream.')+`
+  return pageHead('','Review queue — '+(sub||'all subjects'),'Each question is reviewed once; your ruling applies to every candidate who objected to it. Accepting sends the question to the Moderation Committee and recalculates scores downstream.')+`
   <div class="grid cols-3" style="margin-bottom:18px">
     ${kpi(ICN.list,'Questions on desk',groups.length,q.length+' objections total','')}
     ${kpi(ICN.clock,'Awaiting decision',pendingGroups.length,'in '+(sub||'your subject'),'accent-a')}
@@ -3621,7 +3685,7 @@ PAGES.sme.assigned = ()=>{
 PAGES.sme.history = ()=>{
   const me=currentSme();
   const decided=state.queue.filter(o=>(o.status==='accepted'||o.status==='rejected') && o.sme===me);
-  return pageHead('SME Review Desk','Decision history','An auditable trail of every objection decision, with remarks and timestamps.')+`
+  return pageHead('','Decision history','An auditable trail of every objection decision, with remarks and timestamps.')+`
   <div class="card" style="overflow:hidden"><div style="overflow-x:auto"><table class="tbl">
     <thead><tr><th>Objection</th><th>Question</th><th>Decision</th><th>Remark</th><th>SME</th><th>When</th></tr></thead>
     <tbody>${decided.map(o=>`<tr>
@@ -3652,13 +3716,14 @@ function modCard(o){
       : `Candidates who selected the corrected key gain marks on re-evaluation. The committee can also award the item to everyone if it was ambiguous.`}</div>
     ${done?'':`<div class="mod-actions">
       ${drop?`
-        <button class="btn btn-green btn-sm" onclick="moderate('${o.id}','ALL')">${svg(ICN.user)} Award to ALL candidates</button>
-        <button class="btn btn-ghost btn-sm" onclick="moderate('${o.id}','ATTEMPTED')">${svg(ICN.check)} Only those who attempted</button>
+        <button class="btn btn-sm ${state.modDraft[o.q]==='ALL'?'btn-primary':'btn-ghost'}" onclick="stageMod(${o.q},'ALL')">${svg(ICN.user)} Award to ALL candidates</button>
+        <button class="btn btn-sm ${state.modDraft[o.q]==='ATTEMPTED'?'btn-primary':'btn-ghost'}" onclick="stageMod(${o.q},'ATTEMPTED')">${svg(ICN.check)} Award to attempted Candidates</button>
       `:`
-        <button class="btn btn-green btn-sm" onclick="moderate('${o.id}','REKEY')">${svg(ICN.check)} Re-evaluate (corrected key)</button>
-        <button class="btn btn-ghost btn-sm" onclick="moderate('${o.id}','ALL')">${svg(ICN.user)} Award to all</button>
+        <button class="btn btn-sm ${state.modDraft[o.q]==='REKEY'?'btn-primary':'btn-ghost'}" onclick="stageMod(${o.q},'REKEY')">${svg(ICN.check)} Re-evaluated (Corrected Ans)</button>
+        <button class="btn btn-sm ${state.modDraft[o.q]==='ALL'?'btn-primary':'btn-ghost'}" onclick="stageMod(${o.q},'ALL')">${svg(ICN.user)} Award to all</button>
       `}
     </div>
+    ${state.modDraft[o.q]?`<div class="mod-picked">${svg(ICN.check)} Selected: <b>${policyLabel(state.modDraft[o.q])}</b> — not final until you submit below.</div>`:''}
     <div class="mod-hint">${drop
       ? `For your candidate (${state.me.name}) this question was <b>${attempted?'attempted':'left blank'}</b> — “Award to all” gives them +${state.exam.marksPer}; “attempted only” gives ${attempted?'+'+state.exam.marksPer:'0'}.`
       : ''}</div>`}
@@ -3687,7 +3752,7 @@ PAGES.moderator.modqueue = ()=>{
   const accQ=dedupeByQuestion(acc);
   const pendQ=dedupeByQuestion(pend);
   const drops=accQ.filter(o=>o.smeAction==='drop').length;
-  return pageHead('Moderation Committee','Award moderation','For every question the SME accepted, decide the marking policy — award to all candidates, or only to those who attempted — before scores go to normalization. One policy covers every objector on the question.')+`
+  return pageHead('','Award moderation','For every question the SME accepted, decide the marking policy — award to all candidates, or only to those who attempted — before scores go to normalization. One policy covers every objector on the question.')+`
   <div class="grid cols-3" style="margin-bottom:18px">
     ${kpi(ICN.review,'Accepted questions',accQ.length,acc.length+' objections','')}
     ${kpi(ICN.clock,'Pending policy',pendQ.length,'to moderate','accent-a')}
@@ -3698,12 +3763,16 @@ PAGES.moderator.modqueue = ()=>{
     <div style="margin-top:6px">Items appear here once a Subject Expert accepts an objection (key correction or question drop).</div></div></div>`
   :`${pipelineReady()
     ?`<div class="note note-ok" style="margin-bottom:18px">${svg(ICN.check)}<span><b>Moderation complete.</b> Award policy set for every accepted item — Normalization is now unlocked for the Exam Authority.</span></div>`
-    :`<div class="note note-warn" style="margin-bottom:18px">${svg('<path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/>')}<span><b>${pendQ.length} question(s) still need a policy.</b> Normalization stays locked until every accepted question is moderated.</span></div>`}
-  <div class="mod-list">${accQ.map(modCard).join('')}</div>`}`;
+    :`<div class="note note-warn" style="margin-bottom:18px">${svg('<path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/>')}<span><b>${pendQ.length} question(s) awaiting a policy.</b> Select an award policy on each card, then use <b>Submit moderation decisions</b> below. Normalization stays locked until they are submitted.</span></div>`}
+  <div class="mod-list">${accQ.map(modCard).join('')}</div>
+  ${pendQ.length?`<div class="mod-submit-bar">
+    <div class="msb-txt">${svg(ICN.assign)} ${stagedPending().length} / ${pendQ.length} question${pendQ.length>1?'s':''} have a policy selected</div>
+    <button class="btn btn-primary" ${draftComplete()?'':'disabled'} onclick="submitModeration()">${svg(ICN.check)} Submit moderation decisions</button>
+  </div>`:''}`}`;
 };
 PAGES.moderator.modhistory = ()=>{
   const done=state.queue.filter(o=>o.modStatus==='moderated');
-  return pageHead('Moderation Committee','Moderation history','An auditable record of every award-policy decision.')+`
+  return pageHead('','Moderation history','An auditable record of every award-policy decision.')+`
   <div class="card" style="overflow:hidden"><div style="overflow-x:auto"><table class="tbl">
     <thead><tr><th>Objection</th><th>Question</th><th>SME ruling</th><th>Award policy</th><th>When</th></tr></thead>
     <tbody>${done.length?done.map(o=>`<tr>
@@ -3822,7 +3891,7 @@ function openReview(id){
         ${state.queue.filter(x=>x.q===o.q).map((x,i,arr)=>`
           <div style="padding:${i?'12px':'0'} 0 12px;${i<arr.length-1?'border-bottom:1px solid var(--line)':''}">
             <div style="display:flex;justify-content:space-between;gap:10px;align-items:center">
-              <b style="font-size:12.5px">${x.cand} <span class="mono" style="font-size:10.5px;color:var(--muted);font-weight:400">${x.roll||''}</span></b>
+              <b style="font-size:12.5px">Objection ${i+1}</b>
               <span class="ur-chip">${CAT_SHORT[x.reason]||x.reason}</span></div>
             ${x.exp?`<div style="font-size:12.5px;margin-top:7px;color:var(--ink-2);line-height:1.5">${x.exp}</div>`:''}
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;align-items:center">
@@ -3842,9 +3911,14 @@ function openReview(id){
         </div>
       </div>
       <div id="acceptPanel" style="display:none">
-        <div class="field"><label>Accept as</label>
-          <select class="inp" id="newKey">${Object.keys(q.opts).map(k=>`<option ${k===q.key?'selected':''}>${k}</option>`).join('')}<option>Drop question — all options wrong</option></select>
-          <div class="hint">Re-key updates the Master Answer Key. Either way, the item is referred to the <b>Moderation Committee</b>, which sets the award policy (to all candidates or only those who attempted) before normalization.</div>
+        <div class="field">
+          <label>Set the correct answer key <span class="req">*</span></label>
+          <div class="keypick" id="keypick">
+            ${Object.entries(q.opts).map(([k,v])=>`<button type="button" class="kp-opt${k===q.key?' is-current':''}" data-k="${k}" onclick="pickKey('${k}')"><span class="kp-let">${k}</span><span class="kp-txt">${v}</span>${k===q.key?'<span class="kp-tag">Official key</span>':''}</button>`).join('')}
+            <button type="button" class="kp-opt kp-drop" data-k="__DROP__" onclick="pickKey('__DROP__')"><span class="kp-let">${svg('<path d="M18 6 6 18M6 6l12 12"/>','width="14" height="14"')}</span><span class="kp-txt">Drop question — all options are wrong</span></button>
+          </div>
+          <input type="hidden" id="newKey" value="">
+          <div class="hint">Choose the option that is actually correct. If the official key is wrong, pick the right option (e.g. change the key from <b>${q.key}</b> to the correct one) — this updates the Master Answer Key. Either way the item is referred to the <b>Moderation Committee</b>, which sets the award policy before normalization.</div>
         </div>
       </div>
       <div class="field" style="margin-bottom:0"><label>SME remarks</label>
@@ -3856,6 +3930,11 @@ function openReview(id){
     </div>`;
   $('#overlay').classList.add('open');
   window._currentDecision=null;
+}
+function pickKey(k){
+  const v=$('#newKey'); if(!v) return;
+  v.value = (k==='__DROP__') ? 'Drop question — all options wrong' : k;
+  document.querySelectorAll('#keypick .kp-opt').forEach(b=>b.classList.toggle('sel', b.dataset.k===k));
 }
 function setDecision(d){
   window._currentDecision=d;
@@ -3870,8 +3949,9 @@ function submitDecision(id){
   const d=window._currentDecision; const remark=$('#smeRemark').value.trim();
   let newKey=null, decisionText='', smeAction=null;
   if(d==='accept'){
-    o.status='accepted';
     const nk=$('#newKey').value;
+    if(!nk){ toast('Set the correct answer key (or choose "Drop question") before accepting.'); return; }
+    o.status='accepted';
     if(nk.startsWith('Drop')){
       smeAction='drop';
       decisionText=(remark||'Accepted — all options incorrect. Referred to Moderation Committee for award policy.');
@@ -3920,7 +4000,7 @@ function dbTableEl(rows){
 }
 PAGES.admin.database = ()=>{
   if(!dbReady()){
-    return pageHead('Administration','Database','In-browser SQLite (WASM) store.')+
+    return pageHead('','Database','In-browser SQLite (WASM) store.')+
     `<div class="note note-warn">${svg('<path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/>')}<span><b>SQLite is still loading or unavailable.</b> The WASM engine loads from a CDN the first time this page opens; if you are offline the app runs on its in-memory store instead. Reconnect and reload to activate the live database.</span></div>`;
   }
   const sel=window._dbTable||'objections';
@@ -3928,7 +4008,7 @@ PAGES.admin.database = ()=>{
   const rows=dbAllSafe('SELECT * FROM '+sel+' LIMIT 200');
   const auditRows=dbAllSafe('SELECT ts,actor,action,detail FROM audit ORDER BY id DESC LIMIT 40');
   const defQuery="SELECT o.id, o.q, o.status, q.key FROM objections o JOIN questions q ON q.exam_id=o.exam_id AND q.n=o.q LIMIT 20;";
-  return pageHead('Administration','Database','Live SQLite store — every objection, key change, score and scorecard is written here as the pipeline runs.')+`
+  return pageHead('','Database','Live SQLite store — every objection, key change, score and scorecard is written here as the pipeline runs.')+`
   <div class="grid cols-4" style="margin-bottom:18px">
     ${kpi(ICN.db,'Engine','SQLite','sql.js · WASM','accent-g')}
     ${kpi(ICN.list,'Questions',counts.questions,'master answer key','')}
